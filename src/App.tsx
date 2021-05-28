@@ -56,27 +56,31 @@ function App() {
 
   return (
     <div className="QuizeApp">
-      {number + 1 != TOTAL_QUESTIONS ? (
-        <div>
-          <h1>REACAT QUIZ APP</h1>
-          <h1>Question Numbre {number + 1}</h1>
-          <CardComponent
-            questionNor={number + 1}
-            totalQuestions={TOTAL_QUESTIONS}
-            question={question[number]?.question}
-            answers={question[number]?.answers}
-            callback={handleBack}
-            answerE={answer}
-          />
-          <form onSubmit={nextQuestion}>
+      {/* {number + 1 != TOTAL_QUESTIONS ? ( */}
+      <div>
+        <h1>REACAT QUIZ APP</h1>
+        <h1>Question Numbre {number + 1}</h1>
+        {number + 1 == TOTAL_QUESTIONS ? (
+          <h1>
+            Result {score}/{TOTAL_QUESTIONS}
+          </h1>
+        ) : null}
+        <CardComponent
+          questionNor={number + 1}
+          totalQuestions={TOTAL_QUESTIONS}
+          question={question[number]?.question}
+          answers={question[number]?.answers}
+          callback={handleBack}
+          answerE={answer}
+        />
+        <form onSubmit={nextQuestion}>
+          {number + 1 != TOTAL_QUESTIONS ? (
             <button className="next_que" type="submit">
               Next Question
             </button>
-          </form>
-        </div>
-      ) : (
-        <h1>Result {score}</h1>
-      )}
+          ) : null}
+        </form>
+      </div>
     </div>
   );
 
