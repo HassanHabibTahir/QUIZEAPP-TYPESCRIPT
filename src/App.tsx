@@ -12,6 +12,8 @@ function App() {
   const [number, setNumber] = useState(0);
   const [score, setScore] = useState(0);
   const [answer, setAnswer] = useState<string>();
+  const [option, setOption] = useState<string>("easy");
+
   // async function Results() {
   //   const newQuestions = await QuestionsTypes(10, Difficulty.EASY);
   //   return newQuestions;
@@ -24,11 +26,12 @@ function App() {
 
       const newQuestions = await QuestionsTypes(
         TOTAL_QUESTIONS,
-        Difficulty.EASY
+        // Difficulty.EASY
+        option
       );
       setQuestions(newQuestions);
     })();
-  }, []);
+  }, [option]);
 
   const nextQuestion = async (e: any) => {
     //move on to the next question if not the last qustion
@@ -52,13 +55,22 @@ function App() {
     if (correct) setScore((prev) => prev + 1);
   };
 
-  console.log(number + 1, "score", score);
+  const SellectValue = (e: React.FormEvent) => {
+    let val = (e.target as any).value;
+    setOption(val);
+  };
 
+  console.log(option, "option");
   return (
     <div className="QuizeApp">
       {/* {number + 1 != TOTAL_QUESTIONS ? ( */}
       <div>
         <h1>REACAT QUIZ APP</h1>
+        <select onChange={SellectValue}>
+          <option value="easy">EASY</option>
+          <option value="medium">MEDIUM</option>
+          <option value="hard">HARD</option>
+        </select>
         <h1>Question Numbre {number + 1}</h1>
         {number + 1 == TOTAL_QUESTIONS ? (
           <h1>
